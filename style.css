@@ -1,0 +1,3518 @@
+/* ===== All Friction — shared styles ===== */
+
+:root {
+	--black: #100b2a;
+	--ink: #0a0a0a;
+	--grey: #8a8a8a;
+	--line: #1f1f1f;
+	--white: #fff;
+
+	--paper: #faf3d3;
+	--text: #1a1714;
+
+	--display: "Special Elite", "American Typewriter", "Courier New", monospace;
+	--body: "Inter", system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	scroll-behavior: smooth;
+	scroll-padding-top: 5rem;
+}
+
+body {
+	background: #0b0b0b;
+	color: var(--white);
+	position: relative;
+}
+
+.map::before {
+	content: "";
+
+	position: absolute;
+	top: 70px;
+	left: 50%;
+
+	transform: translateX(-50%);
+
+	width: 1000px;
+	height: 500px;
+
+	background: url("map-modified-modified.jpg") center / contain no-repeat;
+
+	opacity: 0.15;
+
+	z-index: 0;
+	pointer-events: none;
+
+	/* Fade the edges */
+	-webkit-mask-image: radial-gradient(
+		ellipse at center,
+		black 30%,
+		transparent 75%
+	);
+
+	mask-image: radial-gradient(
+		ellipse at center,
+		black 30%,
+		transparent 75%
+	);
+}
+
+main {
+	flex: 1;
+}
+
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+	outline: 2px solid currentColor;
+	outline-offset: 4px;
+}
+
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+.nav {
+	position: sticky;
+	top: 0;
+	z-index: 10;
+
+	height: 70px;
+
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	padding: 0 clamp(1.25rem, 4vw, 3rem);
+
+	background: rgba(8, 8, 8, .78);
+
+	backdrop-filter: blur(12px);
+	-webkit-backdrop-filter: blur(12px);
+
+	border-bottom: 1px solid rgba(255, 255, 255, .08);
+}
+
+
+/* ---------------------------------------------------------
+   Brand
+   --------------------------------------------------------- */
+
+.brand {
+	display: inline-flex;
+	align-items: center;
+
+	color: var(--white);
+
+	font-family: var(--display);
+	font-size: 1rem;
+	line-height: 1;
+	letter-spacing: .04em;
+
+	text-decoration: none;
+
+	transition: opacity .2s ease;
+}
+
+.brand:hover {
+	opacity: .65;
+}
+
+
+/* ---------------------------------------------------------
+   Navigation links
+   --------------------------------------------------------- */
+
+.nav ul {
+	display: flex;
+	align-items: center;
+
+	gap: clamp(1.25rem, 3vw, 2.5rem);
+
+	list-style: none;
+}
+
+
+/* Each navigation link */
+
+.nav a:not(.brand) {
+	position: relative;
+
+	display: inline-flex;
+	align-items: center;
+
+	padding: .5rem 0;
+
+	color: #777;
+
+	font-family: Inter, sans-serif;
+	font-size: .75rem;
+	font-weight: 500;
+	letter-spacing: .06em;
+	text-transform: uppercase;
+
+	text-decoration: none;
+
+	transition: color .2s ease, opacity .2s ease;
+}
+
+
+/* Hover */
+
+.nav a:not(.brand):hover {
+	color: var(--white);
+}
+
+
+/* ---------------------------------------------------------
+   Active page
+   --------------------------------------------------------- */
+
+.nav a:not(.brand)[aria-current="page"] {
+	color: var(--white);
+}
+
+
+/* Small indicator underneath the active page.
+   Much quieter than a full underline. */
+
+.nav a:not(.brand)[aria-current="page"]::after {
+	content: "";
+
+	position: absolute;
+
+	left: 50%;
+	bottom: .15rem;
+
+	width: 3px;
+	height: 3px;
+
+	background: var(--white);
+
+	border-radius: 50%;
+
+	transform: translateX(-50%);
+}
+
+
+/* ---------------------------------------------------------
+   Keyboard focus
+   --------------------------------------------------------- */
+
+.nav a:focus-visible {
+	outline: 1px solid var(--white);
+	outline-offset: 6px;
+}
+
+
+/* =========================================================
+   MOBILE NAV
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+	.nav {
+		height: 64px;
+		padding: 0 1.1rem;
+	}
+
+	.nav ul {
+		gap: 1.25rem;
+	}
+
+	.nav a:not(.brand) {
+		font-size: .7rem;
+	}
+
+	.brand {
+		font-size: .95rem;
+	}
+}
+
+
+/* =========================================================
+   HOME HERO
+   ========================================================= */
+
+.hero {
+	min-height: 70vh;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+	text-align: center;
+
+	padding: 2rem 1.25rem 5rem;
+
+	position: relative;
+	z-index: 1;
+
+	background: radial-gradient(
+		ellipse 70% 50% at 50% 48%,
+		#222222,
+		rgba(8, 8, 8, 0) 70%
+	);
+}
+
+
+/* Main title */
+
+.title {
+	font-family: Inter, sans-serif;
+	font-weight: 400;
+
+	font-size: clamp(2.6rem, 11vw, 8rem);
+	line-height: 1.05;
+
+	white-space: nowrap;
+
+	color: var(--white);
+
+	margin: 0;
+}
+
+
+/* ----- Animated lines underneath ----- */
+
+.hero-lines {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	margin-top: 2rem;
+
+	gap: .35rem;
+}
+
+
+/* Both lines start hidden */
+
+.hero-line {
+	display: block;
+
+	color: var(--grey);
+
+	font-family: Inter, sans-serif;
+	font-size: clamp(1rem, 2vw, 1.25rem);
+	line-height: 1.4;
+
+	opacity: 0;
+	transform: translateY(12px);
+
+	animation: heroLineIn .8s ease forwards;
+}
+
+
+/* First line */
+
+.hero-line-1 {
+	animation-delay: .7s;
+}
+
+
+/* Second line */
+
+.hero-line-2 {
+	animation-delay: 1.15s;
+}
+
+
+/* Animation */
+
+@keyframes heroLineIn {
+
+	from {
+		opacity: 0;
+		transform: translateY(12px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+
+/* Reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+
+	.hero-line {
+		animation: none;
+		opacity: 1;
+		transform: none;
+	}
+}
+
+
+/* =========================================================
+   HERO FACTS
+   ========================================================= */
+
+.facts {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+
+	gap: .55rem 1.25rem;
+
+	margin: 1.35rem auto 0;
+	padding: 0;
+
+	list-style: none;
+
+	color: rgba(255, 255, 255, .48);
+
+	font-family: var(--body);
+	font-size: .68rem;
+	font-weight: 500;
+	letter-spacing: .08em;
+	text-transform: uppercase;
+}
+
+
+/* Individual facts */
+
+.facts li {
+	position: relative;
+
+	opacity: 0;
+	transform: translateY(7px);
+
+	animation: factReveal .55s ease forwards;
+}
+
+
+/* Small separator between facts */
+
+.facts li:not(:last-child)::after {
+	content: "·";
+
+	position: absolute;
+	right: -.8rem;
+
+	color: rgba(255, 255, 255, .25);
+}
+
+
+/* Stagger */
+
+.facts li:nth-child(1) {
+	animation-delay: .35s;
+}
+
+.facts li:nth-child(2) {
+	animation-delay: .5s;
+}
+
+.facts li:nth-child(3) {
+	animation-delay: .65s;
+}
+
+
+@keyframes factReveal {
+
+	from {
+		opacity: 0;
+		transform: translateY(7px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+	.facts {
+		max-width: 20rem;
+
+		gap: .45rem .9rem;
+
+		font-size: .62rem;
+		line-height: 1.5;
+	}
+
+	.facts li:not(:last-child)::after {
+		right: -.6rem;
+	}
+}
+
+
+/* =========================================================
+   INNER PAGE HEADER
+   ========================================================= */
+
+.page-head {
+	max-width: 900px;
+
+	margin: 0 auto;
+
+	padding:
+		clamp(3.5rem, 10vw, 7rem)
+		clamp(1.25rem, 6vw, 3rem)
+		2rem;
+
+	background:
+		radial-gradient(
+			ellipse 60% 80% at 30% 0,
+			#181818,
+			transparent 70%
+		);
+}
+
+.page-head h1 {
+	font-family: Inter;
+	font-weight: 400;
+
+	font-size: clamp(2.4rem, 8vw, 5rem);
+	line-height: 1.05;
+
+	-webkit-text-stroke: .03em var(--white);
+}
+
+.page-head p {
+	margin-top: 1.25rem;
+
+	max-width: 46ch;
+
+	color: var(--grey);
+
+	font-size: 1.1rem;
+	line-height: 1.6;
+}
+
+
+/* =========================================================
+   LAYOUT HELPERS
+   ========================================================= */
+
+.wrap {
+	max-width: 1100px;
+
+	margin: 0 auto;
+
+	padding:
+		2rem
+		clamp(1.25rem, 6vw, 3rem)
+		6rem;
+}
+
+.stack {
+	display: flex;
+	flex-direction: column;
+
+	gap: clamp(4rem, 12vw, 9rem);
+
+	padding-top: clamp(3rem, 10vw, 8rem);
+}
+
+.grid {
+	display: grid;
+
+	grid-template-columns: repeat(
+		auto-fit,
+		minmax(260px, 1fr)
+	);
+
+	gap: 2rem;
+}
+
+.section-title {
+	font-family: var(--display);
+	font-weight: 400;
+
+	font-size: clamp(1.6rem, 4vw, 2.4rem);
+
+	margin: 4rem 0 1.5rem;
+}
+
+
+/* =========================================================
+   PAPER CARDS
+   ========================================================= */
+
+.card {
+	--rot: -.5deg;
+
+	position: relative;
+
+	overflow: hidden;
+
+	padding: clamp(1.5rem, 3.5vw, 2.75rem);
+
+	color: var(--text);
+	background: var(--paper);
+
+	border: 1px solid rgba(26, 23, 20, .14);
+	border-radius: 2px;
+
+	/* Harder, physical shadow.
+	   Feels more like paper sitting on a surface
+	   than a floating digital card. */
+
+	box-shadow: 5px 6px 0 rgba(0, 0, 0, .16);
+
+	transform: rotate(var(--rot));
+}
+
+
+/* Slight variation between sheets */
+
+.card:nth-child(even) {
+	--rot: .45deg;
+	background: #f7efd0;
+}
+
+.card:nth-child(3n) {
+	--rot: -.25deg;
+	background: #eee4c1;
+}
+
+
+/* Don't straighten the paper on hover.
+   A physical piece of paper wouldn't do that. */
+
+.card:hover {
+	box-shadow: 6px 7px 0 rgba(0, 0, 0, .18);
+}
+
+
+/* Small printed/ink imperfections.
+   Much less obvious than a giant circular "coffee stain". */
+
+.card::before {
+	content: "";
+
+	position: absolute;
+
+	top: 1.25rem;
+	right: 1.5rem;
+
+	width: 42px;
+	height: 1px;
+
+	background: rgba(65, 52, 32, .18);
+
+	transform: rotate(-2deg);
+}
+
+
+/* Small irregular mark near the bottom. */
+
+.card::after {
+	content: "";
+
+	position: absolute;
+
+	left: 8%;
+	bottom: 1.5rem;
+
+	width: 28%;
+	height: 1px;
+
+	background: rgba(65, 52, 32, .1);
+
+	transform: rotate(.4deg);
+}
+
+.card > * {
+	position: relative;
+	z-index: 1;
+}
+
+
+/* ---------------------------------------------------------
+   Card typography
+   --------------------------------------------------------- */
+
+.card h2,
+.card h3 {
+	font-family: Inter;
+	font-weight: 400;
+	line-height: 1.1;
+}
+
+.card h2 {
+	font-size: clamp(1.6rem, 4vw, 2.25rem);
+	letter-spacing: -.02em;
+}
+
+
+/* - TEXT COLOUR - */
+
+.card p {
+	margin-top: .85rem;
+
+	line-height: 1.55;
+
+	color: #514b44;
+}
+
+.card ul {
+	margin-top: 1.15rem;
+
+	list-style: none;
+
+	border-top: 1px solid rgba(205, 114, 22, 0.12);
+}
+
+.card li {
+	padding: .55rem 0;
+
+	border-bottom: 1px solid rgba(26, 23, 20, .12);
+
+	font-size: .95rem;
+}
+
+.card small {
+	display: block;
+
+	margin-top: 1.1rem;
+
+	color: #6c5a45;
+}
+
+
+/* ---------------------------------------------------------
+   Stacked cards
+   --------------------------------------------------------- */
+
+.stack .card {
+	width: min(100%, 680px);
+
+	padding: clamp(1.75rem, 5vw, 3.5rem);
+}
+
+.stack .card:nth-child(even) {
+	margin-left: auto;
+}
+
+.stack .card h2 {
+	font-size: clamp(1.85rem, 5vw, 3.2rem);
+	letter-spacing: -.015em;
+}
+
+.stack .card p {
+	max-width: 34ch;
+	font-size: 1.02rem;
+}
+
+
+/* ---------------------------------------------------------
+   Avatar
+   --------------------------------------------------------- */
+
+.avatar {
+	width: 60px;
+	height: 60px;
+
+	border-radius: 50%;
+
+	background: #e4e0d6;
+
+	border: 1px solid rgba(26, 23, 20, .15);
+
+	margin-bottom: 1rem;
+}
+
+/* =========================================================
+  SUBJECTS PAGE
+  ========================================================= */
+
+
+.map-subject {
+   min-height: 100vh;
+}
+
+
+
+
+/* ---------------------------------------------------------
+  Background
+  --------------------------------------------------------- */
+
+
+.map-subject main {
+   position: relative;
+   z-index: 1;
+}
+
+
+
+
+/* ---------------------------------------------------------
+  Page header
+  --------------------------------------------------------- */
+
+
+.map-subject .page-head {
+   width: min(100%, 1100px);
+
+
+   padding:
+       clamp(4rem, 9vw, 7rem)
+       clamp(1.25rem, 5vw, 3rem)
+       2.5rem;
+
+
+   background:
+       radial-gradient(
+           ellipse 55% 80% at 20% 10%,
+           #181818,
+           transparent 70%
+       );
+}
+
+
+.map-subject .page-head h1 {
+   font-family: Inter, sans-serif;
+   font-size: clamp(3rem, 9vw, 6rem);
+   font-weight: 400;
+   line-height: .95;
+   letter-spacing: -.06em;
+
+
+   color: white;
+}
+
+
+
+
+/* ---------------------------------------------------------
+  Subject layout
+  --------------------------------------------------------- */
+
+
+.map-subject .wrap {
+   width: min(100%, 1100px);
+
+
+   margin: 0 auto;
+
+
+   padding:
+       1rem
+       clamp(1.25rem, 5vw, 3rem)
+       7rem;
+}
+
+
+
+
+.map-subject .grid {
+   display: grid;
+
+
+   grid-template-columns:
+       minmax(0, 1fr);
+
+
+   gap: 2rem;
+}
+
+
+
+
+/* ---------------------------------------------------------
+  Chemistry card
+  --------------------------------------------------------- */
+
+
+.map-subject .card {
+   --rot: -.25deg;
+
+
+   width: 100%;
+   max-width: 1000px;
+
+
+   margin: 0;
+
+
+   padding:
+       clamp(1.5rem, 4vw, 3rem);
+
+
+   background: var(--paper);
+   color: var(--text);
+
+
+   border: 1px solid rgba(26, 23, 20, .12);
+   border-radius: 2px;
+
+
+   box-shadow:
+       6px 7px 0 rgba(0, 0, 0, .18);
+
+
+   transform: rotate(var(--rot));
+
+
+   transition:
+       box-shadow .25s ease;
+}
+
+
+
+
+.map-subject .card:hover {
+   box-shadow:
+       8px 9px 0 rgba(0, 0, 0, .2);
+}
+
+
+
+
+/* ---------------------------------------------------------
+  Chemistry heading
+  --------------------------------------------------------- */
+
+
+.map-subject .card h2 {
+   margin: 0;
+
+
+   font-family: Inter, sans-serif;
+   font-size: clamp(2rem, 5vw, 3.25rem);
+   font-weight: 400;
+
+
+   line-height: .95;
+   letter-spacing: -.045em;
+
+
+   color: var(--text);
+}
+
+
+
+
+/* Small label above Chemistry */
+
+
+.map-subject .card h2::before {
+   content: "SUBJECT";
+
+
+   display: block;
+
+
+   margin-bottom: .8rem;
+
+
+   color: #817865;
+
+
+   font-family: Inter, sans-serif;
+   font-size: .62rem;
+   font-weight: 500;
+
+
+   letter-spacing: .12em;
+}
+
+
+
+
+/* ---------------------------------------------------------
+  Introduction
+  --------------------------------------------------------- */
+
+
+.map-subject .card .intro {
+   display: block;
+
+
+   max-width: 60ch;
+
+
+   margin-top: 1.4rem;
+
+
+   color: #5c554d;
+
+
+   font-family: Inter, sans-serif;
+   font-size: .95rem;
+   line-height: 1.7;
+}
+
+
+
+
+/* ---------------------------------------------------------
+  Dividers
+  --------------------------------------------------------- */
+
+
+.map-subject .card hr {
+   height: 2px;
+
+
+   margin: 1.75rem 0;
+
+
+   background:
+       linear-gradient(
+           to right,
+           rgba(6, 61, 149, 0.22),
+           rgba(65, 52, 32, .06)
+       );
+}
+
+
+
+
+/* ---------------------------------------------------------
+  Level accordion
+  --------------------------------------------------------- */
+
+
+.map-subject .level {
+   position: relative;
+
+
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+
+
+   width: 100%;
+
+
+   margin: 0;
+   padding: .85rem 0;
+
+
+   border: 0;
+
+
+   background: transparent;
+   color: var(--text);
+
+
+   font-family: Inter, sans-serif;
+   font-size: .8rem;
+   font-weight: 500;
+
+
+   letter-spacing: .08em;
+   text-transform: uppercase;
+
+
+   cursor: pointer;
+
+
+   transition:
+       color .2s ease,
+       padding .2s ease;
+}
+
+
+
+
+/* Hover */
+
+
+.map-subject .level:hover {
+   padding-left: .35rem;
+
+
+   background: transparent;
+   color: #514b44;
+
+
+   transform: none;
+}
+
+
+
+
+/* Keyboard focus */
+
+
+.map-subject .level:focus-visible {
+   outline:
+       1px solid rgba(26, 23, 20, .55);
+
+
+   outline-offset: 4px;
+}
+
+
+
+
+/* ---------------------------------------------------------
+  Accordion arrow
+  --------------------------------------------------------- */
+
+
+.map-subject .level .arrow {
+   display: inline-flex;
+   align-items: center;
+   justify-content: center;
+
+
+   width: 1.5rem;
+   height: 1.5rem;
+
+
+   color: #756c58;
+
+
+   font-size: 1.1rem;
+   line-height: 1;
+
+
+   transition:
+       transform .25s ease,
+       color .2s ease;
+}
+
+
+
+
+.map-subject .level:hover .arrow {
+   color: var(--text);
+}
+
+
+
+
+.map-subject .level.open .arrow {
+   transform: rotate(180deg);
+}
+
+
+
+
+/* ---------------------------------------------------------
+  Accordion content
+  --------------------------------------------------------- */
+
+
+.map-subject .level-content {
+   max-height: 0;
+
+
+   overflow: hidden;
+
+
+   background: transparent;
+
+
+   transition:
+       max-height .35s ease;
+}
+
+
+
+
+/* Inner spacing */
+
+
+.map-subject .level-content > p {
+   margin: .75rem 0 .5rem;
+
+
+   color: #817865;
+
+
+   font-family: Inter, sans-serif;
+   font-size: .62rem;
+   font-weight: 500;
+
+
+   letter-spacing: .1em;
+   text-transform: uppercase;
+}
+
+
+
+
+/* Lists */
+
+
+.map-subject .level-content ul {
+   margin: .5rem 0 1rem;
+   padding: 0;
+
+
+   list-style: none;
+
+
+   border-top: 1px solid rgba(26, 23, 20, .1);
+}
+
+
+
+
+.map-subject .level-content li {
+   margin: 0;
+
+
+   padding: 0;
+
+
+   border-bottom: 1px solid rgba(26, 23, 20, .1);
+
+
+   color: #514b44;
+
+
+   font-family: Inter, sans-serif;
+   font-size: .9rem;
+   line-height: 1.5;
+}
+
+
+
+
+/* ---------------------------------------------------------
+  Standard links
+  --------------------------------------------------------- */
+
+
+.map-subject .standards {
+   position: relative;
+
+
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+
+
+   width: 100%;
+
+
+   margin: 0;
+   padding: 1rem .75rem;
+
+
+   background: transparent;
+   color: var(--text);
+
+
+   border: 0;
+
+
+   font-family: Inter, sans-serif;
+   font-size: .9rem;
+   font-weight: 500;
+
+
+   line-height: 1.4;
+   text-decoration: none;
+
+
+   transition:
+       background-color .2s ease,
+       padding .2s ease;
+}
+
+
+
+
+/* Arrow */
+
+
+.map-subject .standards::after {
+   content: "→";
+
+
+   flex-shrink: 0;
+
+
+   margin-left: 1rem;
+
+
+   color: #817865;
+
+
+   transform: translateX(-4px);
+
+
+   transition:
+       transform .2s ease,
+       color .2s ease;
+}
+
+
+
+
+/* Hover */
+
+
+.map-subject .standards:hover {
+   background: rgba(26, 23, 20, .055);
+
+
+   padding-left: 1rem;
+
+
+   color: var(--text);
+}
+
+
+
+
+.map-subject .standards:hover::after {
+   color: var(--text);
+
+
+   transform: translateX(0);
+}
+
+
+
+
+/* ---------------------------------------------------------
+  Coming soon items
+  --------------------------------------------------------- */
+
+
+.map-subject .level-content li:not(:has(.standards)) {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+
+
+   gap: 1rem;
+
+
+   padding: .85rem .75rem;
+
+
+   color: #756c58;
+}
+
+
+
+
+/*
+  Add a quiet status label to items that
+  don't have a link.
+*/
+
+
+.map-subject .level-content li:not(:has(.standards))::after {
+   content: "COMING SOON";
+
+
+   flex-shrink: 0;
+
+
+   color: #9a907b;
+
+
+   font-size: .55rem;
+   font-weight: 500;
+
+
+   letter-spacing: .08em;
+}
+
+
+
+
+/* ---------------------------------------------------------
+  Remove old empty spacing
+  --------------------------------------------------------- */
+
+
+.map-subject .card > br {
+   display: none;
+}
+
+
+
+
+/* ---------------------------------------------------------
+  Card marks
+  --------------------------------------------------------- */
+
+
+.map-subject .card::before {
+   top: 1.5rem;
+   right: 1.75rem;
+
+
+   width: 46px;
+
+
+   background: rgba(65, 52, 32, .18);
+}
+
+
+
+
+.map-subject .card::after {
+   left: 8%;
+   bottom: 1.75rem;
+
+
+   width: 24%;
+
+
+   background: rgba(65, 52, 32, .1);
+}
+
+
+
+
+/* =========================================================
+  SUBJECTS — MOBILE
+  ========================================================= */
+
+
+@media (max-width: 600px) {
+
+
+   .map-subject .page-head {
+       padding-top: 3.5rem;
+       padding-bottom: 2rem;
+   }
+
+
+
+
+   .map-subject .page-head h1 {
+       font-size: clamp(2.8rem, 15vw, 4rem);
+   }
+
+
+
+
+   .map-subject .wrap {
+       padding-top: .5rem;
+       padding-bottom: 4rem;
+   }
+
+
+
+
+   .map-subject .card {
+       padding: 1.5rem 1.25rem;
+
+
+       transform: none;
+   }
+
+
+
+
+   .map-subject .card h2 {
+       font-size: 2.25rem;
+   }
+
+
+
+
+   .map-subject .card .intro {
+       font-size: .88rem;
+   }
+
+
+
+
+   .map-subject .card hr {
+       margin: 1.25rem 0;
+   }
+
+
+
+
+   .map-subject .level {
+       padding: .8rem 0;
+
+
+       font-size: .72rem;
+   }
+
+
+
+
+   .map-subject .level-content li {
+       font-size: .82rem;
+   }
+
+
+
+
+   .map-subject .standards {
+       padding: .9rem .5rem;
+   }
+
+
+
+
+   .map-subject .standards:hover {
+       padding-left: .75rem;
+   }
+
+
+
+
+   .map-subject .level-content li:not(:has(.standards)) {
+       padding: .8rem .5rem;
+   }
+
+
+}
+
+
+
+
+/* =========================================================
+   HELP: FAQ
+   ========================================================= */
+
+details {
+	border-bottom: 1px solid var(--line);
+
+	padding: 1.25rem 0;
+}
+
+summary {
+	cursor: pointer;
+
+	font-size: 1.1rem;
+	font-weight: 500;
+
+	list-style: none;
+
+	display: flex;
+	justify-content: space-between;
+
+	gap: 1rem;
+}
+
+summary::after {
+	content: "+";
+
+	color: var(--grey);
+
+	transition: transform .25s;
+}
+
+details[open] summary::after {
+	transform: rotate(45deg);
+}
+
+details p {
+	margin-top: .9rem;
+
+	color: var(--grey);
+
+	line-height: 1.6;
+
+	max-width: 60ch;
+}
+
+
+/* =========================================================
+   FEEDBACK FORM
+   ========================================================= */
+
+form {
+	display: flex;
+	flex-direction: column;
+
+	gap: 1.25rem;
+
+	max-width: 560px;
+}
+
+label {
+	display: flex;
+	flex-direction: column;
+
+	gap: .5rem;
+
+	font-size: .9rem;
+	color: var(--grey);
+}
+
+input,
+select,
+textarea {
+	font: inherit;
+
+	color: var(--white);
+	background: #0e0e0e;
+
+	border: 1px solid #2a2a2a;
+	border-radius: 3px;
+
+	padding: .8rem 1rem;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+	border-color: var(--white);
+	outline: none;
+}
+
+textarea {
+	min-height: 140px;
+	resize: vertical;
+}
+
+button {
+	align-self: flex-start;
+
+	font: inherit;
+	font-weight: 500;
+
+	background: var(--white);
+	color: var(--black);
+
+	border: 0;
+	border-radius: 3px;
+
+	padding: .85rem 1.75rem;
+
+	cursor: pointer;
+
+	transition: transform .2s;
+}
+
+button:hover {
+	transform: translateY(-2px);
+}
+
+.thanks {
+	display: none;
+
+	color: var(--white);
+
+	font-family: var(--display);
+	font-size: 1.3rem;
+}
+
+footer {
+	padding: 2.5rem 1.25rem;
+
+	text-align: center;
+
+	color: var(--grey);
+
+	font-size: .85rem;
+
+	border-top: 1px solid var(--line);
+}
+
+
+/* =========================================================
+   POP-UP ANIMATION
+   ========================================================= */
+
+.js .pop {
+	opacity: 0;
+}
+
+.js .pop.in {
+	animation:
+		pop 0.7s cubic-bezier(.34, 1.56, .64, 1) both;
+
+	animation-delay:
+		calc(var(--i, 0) * 100ms);
+}
+
+@keyframes pop {
+
+	from {
+		opacity: 0;
+
+		transform:
+			translateY(28px)
+			scale(.9)
+			rotate(var(--rot, 0deg));
+	}
+
+	to {
+		opacity: 1;
+
+		transform:
+			translateY(0)
+			scale(1)
+			rotate(var(--rot, 0deg));
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+	.caret {
+		animation: none;
+	}
+
+	.slogan {
+		animation: none;
+		opacity: 1;
+	}
+
+	.js .pop {
+		opacity: 1;
+	}
+
+	.js .pop.in {
+		animation: none;
+	}
+
+	html {
+		scroll-behavior: auto;
+	}
+}
+
+
+/* =========================================================
+   GENERAL
+   ========================================================= */
+
+html {
+	background: #000;
+
+	scroll-behavior: smooth;
+	scroll-padding-top: 5rem;
+}
+
+hr {
+	border: none;
+
+	height: 2px;
+
+	background:
+		linear-gradient(
+			to right,
+			transparent 0%,
+			#b5ad86 15%,
+			#b5ad86 85%,
+			transparent 100%
+		);
+}
+
+
+/* =========================================================
+   SUBJECT LEVEL DROPDOWNS
+   ========================================================= */
+
+.level {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	width: 100%;
+
+	margin: 1% auto;
+
+	padding: 1rem;
+
+	background-color: #faf3d3;
+
+	font-size: 20px;
+
+	border: none;
+
+	cursor: pointer;
+
+	transition: background-color 0.2s ease;
+}
+
+.level:hover {
+	background-color: #c5bc9c;
+}
+
+
+/* The dropdown content starts closed */
+
+.level-content {
+	max-height: 0;
+
+	overflow: hidden;
+
+	background-color: #efe9ca;
+
+	transition: max-height 0.3s ease;
+}
+
+
+/* Some spacing inside the dropdown */
+
+.level-content p,
+.level-content ul {
+	margin: 1rem;
+}
+
+.level-content li {
+	margin-bottom: 0.5rem;
+}
+
+
+/* Arrow */
+
+.arrow {
+	transition: transform 0.3s ease;
+}
+
+
+/* Rotate arrow when open */
+
+.level.open .arrow {
+	transform: rotate(180deg);
+}
+
+
+/* =========================================================
+   PHOTO DIVIDER
+   ========================================================= */
+
+.photo-divider {
+	width: 100%;
+	height: 200px;
+
+	display: flex;
+
+	gap: 2px;
+
+	overflow: hidden;
+}
+
+
+/* Each photo has the same height */
+
+.photo {
+	height: 100%;
+	overflow: hidden;
+}
+
+
+/* Different horizontal widths */
+
+.photo-1 {
+	flex: 25;
+}
+
+.photo-2 {
+	flex: 35;
+}
+
+.photo-3 {
+	flex: 30;
+}
+
+
+/* The actual images */
+
+.photo img {
+	width: 100%;
+	height: 100%;
+
+	display: block;
+
+	object-fit: cover;
+	object-position: center;
+}
+
+
+/* =========================================================
+   STANDARD LINKS
+   ========================================================= */
+
+.standards {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	color: #000;
+
+	text-decoration: none;
+
+	width: 100%;
+
+	margin: 1% auto;
+
+	padding: 1rem;
+
+	background-color: #efe9ca;
+
+	font-size: 15px;
+
+	border: none;
+
+	cursor: pointer;
+
+	transition: background-color 0.2s ease;
+}
+
+.standards:hover {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	color: #000;
+
+	text-decoration: none;
+
+	width: 100%;
+
+	margin: 1% auto;
+
+	padding: 1rem;
+
+	background-color: #cbc6ab;
+
+	font-size: 15px;
+
+	border: none;
+
+	cursor: pointer;
+
+	transition: background-color 0.2s ease;
+}
+
+
+/* =========================================================
+   INTRO
+   ========================================================= */
+
+.intro {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+
+/* =========================================================
+   91164 STANDARD
+   ========================================================= */
+
+.lesson-page::before {
+	content: "";
+
+	position: absolute;
+
+	top: 70px;
+	left: 50%;
+
+	transform: translateX(-50%);
+
+	width: 1000px;
+	height: 500px;
+
+	background: url("chem-modified-modified.jpg") center / contain no-repeat;
+
+	opacity: 0.20;
+
+	z-index: 0;
+	pointer-events: none;
+
+	/* Fade the edges */
+
+	mask-image: radial-gradient(
+		ellipse at 50% calc(50% - 40px),
+		black 0%,
+		transparent 55%
+	);
+}
+
+
+/* ---------------------------------------------------------
+   APPLICATION
+   --------------------------------------------------------- */
+
+.standard-app {
+	min-height: calc(100vh - 70px);
+}
+
+
+/* =========================================================
+   STANDARD OVERVIEW
+   ========================================================= */
+
+.standard-overview {
+	display: none;
+
+	width: min(100%, 1100px);
+
+	margin: 0 auto;
+
+	padding:
+		clamp(3rem, 8vw, 6rem)
+		clamp(1.25rem, 5vw, 3rem)
+		5rem;
+}
+
+.standard-overview.active {
+	display: block;
+}
+
+
+/* ---------------------------------------------------------
+   Standard header
+   --------------------------------------------------------- */
+
+.standard-header {
+	padding-bottom: 4rem;
+}
+
+.standard-code {
+	display: block;
+
+	margin-bottom: .75rem;
+
+	color: #777;
+
+	font-family: Inter;
+	font-size: .75rem;
+
+	letter-spacing: .08em;
+}
+
+.standard-header h1 {
+	margin-bottom: 1rem;
+
+	font-family: Inter;
+
+	font-size: clamp(3rem, 12vw, 5rem);
+	font-weight: 450;
+
+	line-height: .9;
+	letter-spacing: -.06em;
+}
+
+.standard-header p {
+	max-width: 50ch;
+
+	font-family: Inter;
+
+	color: #cacaca;
+
+	font-size: 1rem;
+	line-height: 1.6;
+}
+
+
+/* =========================================================
+   OVERVIEW SECTIONS
+   ========================================================= */
+
+.overview-section {
+	margin-top: 4rem;
+}
+
+.overview-section-heading {
+	display: flex;
+	align-items: baseline;
+
+	gap: 1rem;
+
+	margin-bottom: 1rem;
+
+	border-bottom: 1px solid var(--line);
+
+	padding-bottom: .75rem;
+}
+
+.overview-section-heading span {
+	color: #999999;
+
+	font-family: Inter;
+	font-size: .7rem;
+}
+
+.overview-section-heading h2 {
+	font-size: 1.25rem;
+	font-weight: 450;
+
+	font-family: Inter;
+}
+
+
+/* =========================================================
+   LESSON LIST
+   ========================================================= */
+
+.lesson-list {
+	display: flex;
+	flex-direction: column;
+}
+
+.lesson-card {
+	width: 100%;
+
+	display: grid;
+
+	grid-template-columns: 60px 1fr auto;
+
+	align-items: center;
+
+	gap: 1rem;
+
+	padding: 1.35rem 1rem;
+
+	border: 0;
+	border-bottom: 1px solid #202020;
+
+	background: #242421;
+	color: white;
+
+	text-align: left;
+
+	cursor: pointer;
+
+	transition:
+		background-color .2s ease,
+		padding .2s ease;
+}
+
+.lesson-card:hover {
+	background: #111;
+
+	padding-left: 1.5rem;
+	padding-right: 1.5rem;
+}
+
+.lesson-card-number {
+	color: #e6e6e6;
+
+	font-family: Inter;
+	font-size: .75rem;
+}
+
+.lesson-card-content {
+	display: flex;
+	flex-direction: column;
+
+	font-family: Inter;
+
+	gap: .3rem;
+}
+
+.lesson-card-content strong {
+	font-size: 1.05rem;
+	font-weight: 400;
+}
+
+.lesson-card-content small {
+	color: #666;
+	font-size: .75rem;
+}
+
+.lesson-card-arrow {
+	color: #777;
+
+	font-size: 1.2rem;
+
+	transition: transform .2s ease;
+}
+
+.lesson-card:hover .lesson-card-arrow {
+	transform: translateX(5px);
+	color: white;
+}
+
+
+/* =========================================================
+   RESOURCE CARDS
+   ========================================================= */
+
+.resource-card {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	gap: 2rem;
+
+	padding: 1.5rem;
+
+	background: #111;
+
+	border: 1px solid #222;
+}
+
+.resource-card strong {
+	font-weight: 400;
+}
+
+.resource-card p {
+	max-width: 55ch;
+
+	margin-top: .5rem;
+
+	color: #777;
+
+	font-size: .9rem;
+	line-height: 1.5;
+}
+
+.resource-card > span {
+	color: #777;
+	font-size: 1.2rem;
+}
+
+
+/* =========================================================
+   OVERVIEW NOTE
+   ========================================================= */
+
+.overview-note {
+	max-width: 800px;
+
+	padding: 1.5rem;
+
+	border-left: 5px solid #0751c8;
+
+	background: #ece7d1;
+	color: #000000;
+
+	line-height: 1.7;
+
+	box-shadow: -11px 0px 20px rgba(4, 100, 255, 0.3);
+
+	font-family: Inter;
+}
+
+.overview-note ul {
+	padding-left: 1.5rem;
+}
+
+.overview-note li {
+	padding-top: 0.5rem;
+}
+
+.overview-note ol {
+	padding-left: 1.5rem;
+}
+
+.overview-note p + p {
+	margin-top: 1rem;
+	margin-bottom: 0.5rem;
+}
+
+.overview-note b {
+	font-weight: 100000;
+
+	color: #000000;
+
+	font-style: italic;
+}
+
+.overview-note hr {
+	margin: 1rem 0;
+}
+
+
+/* =========================================================
+   LESSON MODE
+   ========================================================= */
+
+.lesson-mode {
+	position: relative;
+
+	/* add this */
+
+	display: none;
+
+	height: calc(100vh - 70px);
+
+	overflow: hidden;
+
+	flex-direction: column;
+}
+
+.lesson-mode.active {
+	display: flex;
+}
+
+
+/* =========================================================
+   LESSON TOP BAR
+   ========================================================= */
+
+.lesson-topbar {
+	position: absolute;
+
+	top: 0;
+	left: 0;
+	right: 0;
+
+	z-index: 5;
+
+	height: 64px;
+
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	padding: 0 clamp(1rem, 4vw, 3rem);
+
+	background: rgba(9, 9, 9, .9);
+
+	backdrop-filter: blur(8px);
+
+	border-bottom: 1px solid var(--line);
+}
+
+.lesson-location {
+	display: flex;
+	align-items: center;
+
+	gap: .75rem;
+
+	min-width: 0;
+
+	color: #888;
+
+	font-family: var(--display);
+	font-size: .75rem;
+}
+
+.back-to-standard {
+	padding: 0;
+
+	border: 0;
+
+	background: transparent;
+
+	color: #888;
+
+	font-family: Inter;
+	font-size: .75rem;
+
+	cursor: pointer;
+
+	transition: color .2s ease;
+}
+
+.back-to-standard:hover {
+	color: white;
+}
+
+.location-divider {
+	color: #333;
+}
+
+#lessonTitle {
+	overflow: hidden;
+
+	color: #fff;
+
+	white-space: nowrap;
+	text-overflow: ellipsis;
+
+	font-family: Inter;
+}
+
+.lesson-position {
+	flex-shrink: 0;
+
+	display: flex;
+
+	gap: .35rem;
+
+	color: #555;
+
+	font-family: var(--display);
+	font-size: .7rem;
+}
+
+#lessonNumber {
+	color: white;
+}
+
+
+/* =========================================================
+   LESSON VIEWPORT
+   ========================================================= */
+
+.lesson-viewport {
+	flex: 1;
+
+	min-height: 0;
+
+	overflow: hidden;
+
+	position: relative;
+}
+
+
+/* ---------------------------------------------------------
+   Individual lesson
+   --------------------------------------------------------- */
+
+.lesson-instance {
+	display: none;
+
+	width: 100%;
+	height: 100%;
+}
+
+.lesson-instance.active {
+	display: block;
+}
+
+
+/* ---------------------------------------------------------
+   Individual slide
+   --------------------------------------------------------- */
+
+.lesson-slide {
+	display: none;
+
+	width: 100%;
+	height: 100%;
+
+	overflow-y: auto;
+
+	padding:
+		clamp(1.5rem, 4vw, 3rem)
+		clamp(1rem, 5vw, 5rem)
+		3rem;
+}
+
+.lesson-slide.active {
+	display: block;
+}
+
+
+/* =========================================================
+   PART HEADING
+   ========================================================= */
+
+.part-heading {
+	width: min(100%, 900px);
+
+	margin: 0 auto 1.25rem;
+}
+
+.part-heading > span {
+	display: block;
+
+	margin-bottom: .5rem;
+
+	color: #666;
+
+	font-family: var(--display);
+	font-size: .65rem;
+	letter-spacing: .1em;
+}
+
+.part-heading h2 {
+	color: white;
+
+	font-size: clamp(1.8rem, 4vw, 3rem);
+	font-weight: 400;
+
+	font-family: Inter;
+
+	line-height: 1;
+}
+
+
+/* =========================================================
+   PAPER
+   ========================================================= */
+
+.paper {
+	position: relative;
+
+	width: min(100%, 900px);
+
+	min-height: 500px;
+
+	margin: 0 auto;
+
+	padding: clamp(2rem, 5vw, 4rem);
+
+	background: var(--paper);
+	color: var(--text);
+
+	border: 1px solid rgba(26, 23, 20, .15);
+	border-radius: 2px;
+
+	box-shadow: 7px 8px 0 rgba(0, 0, 0, .25);
+
+	transform: rotate(-.2deg);
+}
+
+.lesson-slide:nth-child(even) .paper {
+	background: #f7efd0;
+
+	transform: rotate(.2deg);
+}
+
+.paper::after {
+	content: "";
+
+	position: absolute;
+
+	left: 8%;
+	bottom: 2rem;
+
+	width: 25%;
+	height: 1px;
+
+	background: rgba(65, 52, 32, .1);
+
+	transform: rotate(.4deg);
+}
+
+.paper > * {
+	position: relative;
+	z-index: 1;
+}
+
+.paper-label {
+	display: block;
+
+	margin-bottom: 1.5rem;
+
+	color: #756c58;
+
+	font-family: var(--display);
+	font-size: .7rem;
+
+	letter-spacing: .08em;
+}
+
+.paper h3 {
+	margin-bottom: 1rem;
+
+	font-size: clamp(1.4rem, 3vw, 2rem);
+	font-weight: 400;
+
+	font-family: Inter;
+}
+
+.paper h4 {
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+
+	font-size: 1.4rem;
+	font-weight: 400;
+
+	font-family: Inter;
+}
+
+.paper p {
+	max-width: 65ch;
+
+	margin-top: 1rem;
+
+	color: #514b44;
+
+	line-height: 1.7;
+
+	font-family: Inter;
+}
+
+.paper ul {
+	max-width: 65ch;
+
+	margin-top: 1rem;
+	margin-left: 1.5rem;
+
+	color: #514b44;
+
+	line-height: 1.7;
+
+	font-family: Inter;
+}
+
+
+/* =========================================================
+   LESSON FIGURE
+   ========================================================= */
+
+.lesson-figure {
+	display: flex;
+	align-items: center;
+
+	gap: 1.75rem;
+
+	margin-top: 2rem;
+	padding: 1.5rem;
+
+	border: 1px dashed rgba(50, 45, 38, .3);
+
+	background: rgba(80, 70, 55, .04);
+}
+
+.lesson-figure-text {
+	flex: 1 1 40%;
+}
+
+.lesson-figure-label {
+	display: block;
+
+	margin-bottom: .5rem;
+
+	color: #756c58;
+
+	font-family: var(--display);
+	font-size: .65rem;
+
+	letter-spacing: .08em;
+
+	font-family: Inter;
+}
+
+.lesson-figure-text h4 {
+	font-family: Inter;
+	font-weight: 500;
+
+	font-size: 1.1rem;
+
+	margin-bottom: .5rem;
+
+	color: var(--text);
+}
+
+.lesson-figure-text p {
+	font-family: Inter;
+
+	font-size: .9rem;
+	line-height: 1.6;
+
+	color: #514b44;
+}
+
+.lesson-figure-text blue {
+	color: #0751c8;
+	font-weight: 500;
+}
+
+.lesson-figure-text orange {
+	color: #ff9411;
+	font-weight: 500;
+}
+
+.lesson-figure-text green {
+	color: #3cd33c;
+	font-weight: 500;
+}
+
+.lesson-figure-image {
+	flex: 1 1 55%;
+
+	max-width: 700px;
+
+	overflow: hidden;
+
+	/* this is what actually clips the image */
+
+	border-radius: 2px;
+
+	box-shadow: 4px 5px 0 rgba(0, 0, 0, .15);
+}
+
+.lesson-figure-image img {
+	display: block;
+
+	width: 100%;
+	height: 100%;
+
+	object-fit: cover;
+
+	/* fills the box without distorting */
+}
+
+@media (max-width: 700px) {
+
+	.lesson-figure {
+		flex-direction: column;
+	}
+
+	.lesson-figure-image {
+		max-width: 100%;
+	}
+}
+
+
+/* =========================================================
+   LARGE LESSON FIGURE
+   ========================================================= */
+
+.lesson-figure-large {
+	display: flex;
+	align-items: center;
+
+	gap: 1.75rem;
+
+	margin-top: 2rem;
+	padding: 1.5rem;
+
+	border: 1px dashed rgba(50, 45, 38, .3);
+
+	background: rgba(80, 70, 55, .04);
+}
+
+.lesson-figure-large-text {
+	flex: 1 1 30%;
+}
+
+.lesson-figure-large-label {
+	display: block;
+
+	margin-bottom: .5rem;
+
+	color: #756c58;
+
+	font-family: var(--display);
+	font-size: .65rem;
+
+	letter-spacing: .08em;
+
+	font-family: Inter;
+}
+
+.lesson-figure-large-text h4 {
+	font-family: Inter;
+	font-weight: 500;
+
+	font-size: 1.1rem;
+
+	margin-bottom: .5rem;
+
+	color: var(--text);
+}
+
+.lesson-figure-large-text p {
+	font-family: Inter;
+
+	font-size: .9rem;
+	line-height: 1.6;
+
+	color: #514b44;
+}
+
+.lesson-figure-large-text blue {
+	color: #0751c8;
+	font-weight: 500;
+}
+
+.lesson-figure-large-text orange {
+	color: #ff9411;
+	font-weight: 500;
+}
+
+.lesson-figure-large-text green {
+	color: #3cd33c;
+	font-weight: 500;
+}
+
+.lesson-figure-large-image {
+	flex: 1 1 70%;
+
+	max-width: 700px;
+
+	overflow: hidden;
+
+	/* this is what actually clips the image */
+
+	border-radius: 2px;
+
+	box-shadow: 4px 5px 0 rgba(0, 0, 0, .15);
+}
+
+.lesson-figure-large-image img {
+	display: block;
+
+	width: 100%;
+	height: 100%;
+
+	object-fit: cover;
+
+	/* fills the box without distorting */
+}
+
+@media (max-width: 700px) {
+
+	.lesson-figure-large {
+		flex-direction: column;
+	}
+
+	.lesson-figure-large-image {
+		max-width: 100%;
+	}
+}
+
+
+/* =========================================================
+   METHOD
+   ========================================================= */
+
+.method {
+	display: flex;
+	flex-direction: column;
+
+	gap: 1.75rem;
+
+	margin-top: 2rem;
+	padding: 1.5rem;
+
+	border: 1px dashed rgba(50, 45, 38, .3);
+
+	background: rgba(80, 70, 55, .04);
+}
+
+.method-text {
+	width: 100%;
+}
+
+.method-label {
+	display: block;
+
+	margin-bottom: .5rem;
+
+	color: #756c58;
+
+	font-family: Inter;
+	font-size: .65rem;
+
+	letter-spacing: .08em;
+}
+
+.method-text h4 {
+	font-family: Inter;
+	font-weight: 500;
+
+	font-size: 1.1rem;
+
+	margin-bottom: .5rem;
+
+	color: var(--text);
+}
+
+.method-text p {
+	font-family: Inter;
+
+	font-size: .9rem;
+	line-height: 1.6;
+
+	color: #514b44;
+}
+
+.method-image {
+	width: 100%;
+
+	max-width: 700px;
+
+	overflow: hidden;
+
+	border-radius: 2px;
+
+	box-shadow: 4px 5px 0 rgba(0, 0, 0, .15);
+}
+
+.method-image img {
+	display: block;
+
+	width: 100%;
+	height: auto;
+}
+
+
+/* =========================================================
+   PLACEHOLDERS
+   ========================================================= */
+
+.content-placeholder,
+.question-placeholder,
+.answer-placeholder {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	min-height: 180px;
+
+	margin-top: 2rem;
+
+	border: 1px dashed rgba(50, 45, 38, .3);
+
+	color: #827966;
+
+	font-family: var(--display);
+	font-size: .7rem;
+
+	letter-spacing: .08em;
+
+	text-align: center;
+}
+
+.question-placeholder {
+	min-height: 120px;
+
+	background: rgba(255, 255, 255, .15);
+}
+
+.answer-placeholder {
+	min-height: 150px;
+
+	background: rgba(80, 70, 55, .06);
+}
+
+
+/* =========================================================
+   LESSON CONTROLS
+   ========================================================= */
+
+.lesson-controls {
+	flex: 0 0 auto;
+
+	height: 42px;
+
+	display: grid;
+
+	grid-template-columns: 1fr auto 1fr;
+
+	align-items: center;
+
+	gap: 1rem;
+
+	padding: 0 clamp(1rem, 4vw, 3rem);
+
+	background: #090909;
+
+	border-top: 1px solid var(--line);
+}
+
+
+/* ---------------------------------------------------------
+   Control buttons
+   --------------------------------------------------------- */
+
+.lesson-control {
+	display: flex;
+	align-items: center;
+
+	gap: .7rem;
+
+	min-width: 130px;
+
+	padding: .75rem 1rem;
+
+	border: 1px solid #292929;
+	border-radius: 2px;
+
+	background: #111;
+	color: #aaa;
+
+	cursor: pointer;
+
+	transition:
+		background-color .2s ease,
+		color .2s ease,
+		border-color .2s ease;
+}
+
+.lesson-part-indicator span {
+	font-family: Inter;
+	font-size: .8rem;
+}
+
+.lesson-control span {
+	font-family: Inter;
+	font-size: .8rem;
+}
+
+.lesson-control:hover:not(:disabled) {
+	background: #1a1a1a;
+
+	color: white;
+
+	border-color: #555;
+}
+
+.lesson-control.next {
+	justify-self: end;
+
+	justify-content: flex-end;
+}
+
+.lesson-control.previous {
+	justify-self: start;
+}
+
+.lesson-control:disabled {
+	opacity: .3;
+
+	cursor: not-allowed;
+}
+
+.control-arrow {
+	font-size: 1.2rem;
+}
+
+.lesson-part-indicator {
+	display: flex;
+
+	gap: .4rem;
+
+	color: #444;
+
+	font-family: var(--display);
+	font-size: .7rem;
+}
+
+#currentPart {
+	color: white;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.site-footer {
+	padding: 2rem 1rem;
+
+	border-top: 1px solid var(--line);
+
+	color: #555;
+
+	font-size: .75rem;
+
+	text-align: center;
+}
+
+
+/* =========================================================
+   DESKTOP LESSON MODE
+   ========================================================= */
+
+@media (min-width: 801px) {
+
+	.lesson-slide::-webkit-scrollbar {
+		width: 7px;
+	}
+
+	.lesson-slide::-webkit-scrollbar-track {
+		background: #0b0b0b;
+	}
+
+	.lesson-slide::-webkit-scrollbar-thumb {
+		background: #292929;
+	}
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 800px) {
+
+	.standard-overview {
+		padding-top: 2.5rem;
+	}
+
+	.standard-header {
+		padding-bottom: 2rem;
+	}
+
+	.overview-section {
+		margin-top: 2.5rem;
+	}
+
+	.lesson-card {
+		grid-template-columns: 40px 1fr auto;
+
+		padding: 1rem .5rem;
+	}
+
+	.lesson-card:hover {
+		padding-left: .5rem;
+		padding-right: .5rem;
+	}
+
+	.lesson-mode {
+		height: calc(100vh - 70px);
+	}
+
+	.lesson-topbar {
+		height: 58px;
+
+		padding: 0 1rem;
+	}
+
+	.lesson-location {
+		gap: .5rem;
+
+		font-size: .65rem;
+	}
+
+	.lesson-slide {
+		padding:
+			calc(58px + 1.25rem)
+			.75rem
+			2rem;
+	}
+
+	.part-heading {
+		margin-bottom: 1rem;
+	}
+
+	.part-heading h2 {
+		font-size: 1.8rem;
+	}
+
+	.paper {
+		min-height: 450px;
+
+		padding: 1.75rem 1.25rem;
+
+		transform: none !important;
+	}
+
+	.lesson-controls {
+		height: 72px;
+
+		padding: 0 .75rem;
+
+		gap: .5rem;
+	}
+
+	.lesson-control {
+		min-width: 48px;
+		width: 48px;
+		height: 44px;
+
+		justify-content: center;
+
+		padding: 0;
+	}
+
+	.lesson-control span:not(.control-arrow) {
+		display: none;
+	}
+
+	.lesson-control.next {
+		justify-content: center;
+	}
+
+	.lesson-part-indicator {
+		font-size: .65rem;
+	}
+
+	.site-footer {
+		display: none;
+	}
+}
+
+
+html.lesson-reading,
+body.lesson-reading {
+	height: 100%;
+
+	overflow: hidden;
+}
+
+.lesson-slide {
+	display: none;
+
+	width: 100%;
+	height: 100%;
+
+	overflow-y: auto;
+
+	padding:
+		calc(64px + clamp(1.5rem, 4vw, 3rem))
+		clamp(1rem, 5vw, 5rem)
+		3rem;
+}
+
+
+/* =========================================================
+   VALENCE ELECTRON QUIZ
+   ========================================================= */
+
+.ve-quiz {
+	margin-top: 2rem;
+
+	padding: 1.5rem;
+
+	border: 1px dashed rgba(50, 45, 38, .3);
+
+	background: rgba(80, 70, 55, .04);
+}
+
+.ve-quiz-header p {
+	font-family: Inter;
+
+	font-size: .9rem;
+	line-height: 1.6;
+
+	color: #514b44;
+
+	margin-top: .5rem;
+}
+
+.ve-quiz-header h4 {
+	font-family: Inter;
+	font-weight: 500;
+
+	font-size: 1.1rem;
+
+	color: var(--text);
+}
+
+.ve-quiz-list {
+	display: flex;
+	flex-direction: column;
+
+	margin-top: 1.5rem;
+
+	border-top: 1px solid rgba(26, 23, 20, .12);
+}
+
+.ve-quiz-row {
+	display: grid;
+
+	grid-template-columns: 1fr 90px 32px;
+
+	align-items: center;
+
+	gap: 1rem;
+
+	padding: .85rem 0;
+
+	border-bottom: 1px solid rgba(26, 23, 20, .12);
+}
+
+.ve-quiz-element {
+	font-family: Inter;
+	font-size: .95rem;
+
+	color: var(--text);
+}
+
+.ve-quiz-input {
+	font: inherit;
+	font-family: Inter;
+	font-size: .95rem;
+
+	text-align: center;
+
+	padding: .5rem;
+
+	border: 1px solid rgba(26, 23, 20, .25);
+	border-radius: 2px;
+
+	background: #fffdf5;
+	color: var(--text);
+}
+
+.ve-quiz-input:focus {
+	outline: none;
+
+	border-color: #0751c8;
+}
+
+.ve-quiz-result {
+	font-size: 1.1rem;
+
+	text-align: center;
+}
+
+.ve-quiz-row.correct .ve-quiz-result::after {
+	content: "✓";
+	color: #1c8a3c;
+}
+
+.ve-quiz-row.incorrect .ve-quiz-result::after {
+	content: "✕";
+	color: #c8380c;
+}
+
+.ve-quiz-row.correct {
+	background: rgba(28, 138, 60, .06);
+}
+
+.ve-quiz-row.incorrect {
+	background: rgba(200, 56, 12, .06);
+}
+
+.ve-quiz-actions {
+	display: flex;
+	align-items: center;
+
+	gap: 1rem;
+
+	margin-top: 1.5rem;
+}
+
+.ve-quiz-mark,
+.ve-quiz-reset {
+	font: inherit;
+	font-family: Inter;
+	font-size: .85rem;
+	font-weight: 500;
+
+	padding: .65rem 1.4rem;
+
+	border: 0;
+	border-radius: 2px;
+
+	cursor: pointer;
+
+	transition:
+		transform .15s ease,
+		opacity .15s ease;
+}
+
+.ve-quiz-mark {
+	background: var(--text);
+	color: var(--paper);
+}
+
+.ve-quiz-reset {
+	background: transparent;
+
+	color: #6c5a45;
+
+	border: 1px solid rgba(26, 23, 20, .25);
+}
+
+.ve-quiz-mark:hover,
+.ve-quiz-reset:hover {
+	transform: translateY(-1px);
+}
+
+.ve-quiz-score {
+	margin-left: auto;
+
+	font-family: var(--display);
+	font-size: .85rem;
+
+	color: #514b44;
+}
+
+@media (max-width: 500px) {
+
+	.ve-quiz-row {
+		grid-template-columns: 1fr 70px 28px;
+
+		gap: .5rem;
+	}
+}
+
+
+/* =========================================================
+   LEWIS STRUCTURE DRAWING WIDGET
+   ========================================================= */
+
+.lewis-draw {
+	margin-top: 2rem;
+
+	padding: 1.5rem;
+
+	border: 1px dashed rgba(50, 45, 38, .3);
+
+	background: rgba(80, 70, 55, .04);
+}
+
+.lewis-draw-header h4 {
+	font-family: Inter;
+	font-weight: 500;
+
+	font-size: 1.1rem;
+
+	color: var(--text);
+}
+
+.lewis-draw-header p {
+	font-family: Inter;
+
+	font-size: .9rem;
+	line-height: 1.6;
+
+	color: #514b44;
+
+	margin-top: .5rem;
+}
+
+.lewis-draw-toolbar {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+
+	gap: 1.5rem;
+
+	margin-top: 1.25rem;
+	padding-bottom: 1rem;
+
+	border-bottom: 1px solid rgba(26, 23, 20, .12);
+}
+
+.lewis-draw-group {
+	display: flex;
+	align-items: center;
+
+	gap: .5rem;
+}
+
+.lewis-color {
+	width: 26px;
+	height: 26px;
+
+	border-radius: 50%;
+
+	border: 2px solid transparent;
+
+	background-color: var(--c, #1a1714);
+
+	cursor: pointer;
+
+	transition:
+		transform .15s ease,
+		border-color .15s ease;
+}
+
+.lewis-color[data-color="#1a1714"] {
+	--c: #1a1714;
+}
+
+.lewis-color[data-color="#0751c8"] {
+	--c: #0751c8;
+}
+
+.lewis-color[data-color="#c8380c"] {
+	--c: #c8380c;
+}
+
+.lewis-color[data-color="#1c8a3c"] {
+	--c: #1c8a3c;
+}
+
+.lewis-color.active {
+	border-color: #756c58;
+
+	transform: scale(1.15);
+}
+
+.lewis-size,
+.lewis-undo,
+.lewis-clear,
+.lewis-reveal {
+	font: inherit;
+	font-family: Inter;
+	font-size: .8rem;
+	font-weight: 500;
+
+	padding: .45rem .9rem;
+
+	border: 1px solid rgba(26, 23, 20, .25);
+	border-radius: 2px;
+
+	background: #fffdf5;
+	color: #514b44;
+
+	cursor: pointer;
+
+	transition:
+		background-color .15s ease,
+		color .15s ease;
+}
+
+.lewis-size.active {
+	background: var(--text);
+	color: var(--paper);
+
+	border-color: var(--text);
+}
+
+.lewis-undo:hover,
+.lewis-clear:hover,
+.lewis-reveal:hover {
+	background: #ece7d1;
+}
+
+.lewis-draw-canvas-wrap {
+	position: relative;
+
+	margin-top: 1.25rem;
+
+	border: 1px solid rgba(26, 23, 20, .2);
+
+	box-shadow: 4px 5px 0 rgba(0, 0, 0, .12);
+}
+
+.lewis-draw-canvas {
+	display: block;
+
+	width: 100%;
+	height: 380px;
+
+	background: #fffdf5;
+
+	touch-action: none;
+
+	/* important: stops scrolling while drawing on touch */
+
+	cursor: crosshair;
+}
+
+.lewis-draw-answer {
+	position: absolute;
+
+	inset: 0;
+
+	width: 100%;
+	height: 100%;
+
+	object-fit: contain;
+
+	background: #fffdf5;
+
+	display: none;
+
+	pointer-events: none;
+}
+
+.lewis-draw-answer.visible {
+	display: block;
+}
+
+.lewis-draw-footer {
+	display: flex;
+	justify-content: flex-end;
+
+	margin-top: 1rem;
+}
+
+.paper .lewis-draw {
+	border: none;
+
+	background: transparent;
+
+	padding: 0;
+
+	margin-top: 1.5rem;
+}
+
+.paper + .paper {
+	margin-top: 4rem;
+}
